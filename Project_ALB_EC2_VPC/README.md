@@ -11,8 +11,7 @@ Outline:
 6) Deploying EC2 Instances
 7) Application Load Balancer (ALB)
 8) Load Balancer Listener and DNS
-9) Running Terraform and Deploying Resources
-10) 
+9) Running Terraform and Deploying Resources 
 
 ### Install AWS CLI and Configure.
 
