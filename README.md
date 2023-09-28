@@ -355,3 +355,42 @@ resource "aws_security_group" "my-SG" {
 }
 ```
 
+# Modules
+
+Modules are containers for multiple resources that are used together. A module consists of a collection of `.tf` files kept together in a directory. A module can call other modules, which lets you include the child module's resources into the configuration in a concise way. Modules can also be called multiple times, either within the same configuration or in separate configurations, allowing resource configurations to be packaged and re-used. 
+
+Module Inputs (Variables):
+
+1) Modules can have input variables that allow users to customize the behavior of the module.
+2) Input variables are defined using the variable block in the module's configuration.
+3) Users of the module provide values for these variables when they call the module.
+
+Module Outputs:
+
+1) Modules can define output values that allow users to access information or results from the module.
+2) Output values are defined using the output block in the module's configuration.
+
+```
+variable "ami" {
+  description = "The AMI ID for the EC2 instance"
+}
+
+// main.tf (inside the module directory)
+
+resource "aws_instance" "example" {
+  ami           = var.ami
+  instance_type = var.instance_type
+}
+
+variable "instance_type" {
+  description = "The instance type for the EC2 instance"
+}
+
+output "instance_id" {
+  description = "The ID of the created EC2 instance"
+  value       = aws_instance.example.id
+}
+```
+
+
+
