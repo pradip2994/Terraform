@@ -469,4 +469,54 @@ terraform {
 
 Replace `pradipkv247` and `terraform_state_files/terraform.tfstate` with your S3 bucket and desired state file path.
 
+# Provisioners
 
+Provisioners are a mechanism for running scripts or commands on the remote resources after they are created or updated. Provisioners are typically used for tasks such as configuring software on a virtual machine, initializing databases, or performing any other post-resource creation tasks.
+
+Provisioners should be used with caution because they introduce a level of imperative behavior in what is otherwise a declarative infrastructure-as-code approach. It's generally recommended to rely on native configuration management tools (e.g., Ansible, Chef, Puppet) for more complex configuration tasks and use provisioners for simple tasks or as a last resort when no other option is available.
+
+## There are two types of provisioners
+
+### 1) Local-Exec Provisioners:
+
+ These provisioners are often used for local tasks, like creating SSH keys, generating configuration files, or preparing files that will be uploaded to remote resources.
+
+ ```
+ resource "aws_instance" "my_ec2_instance" {
+  ami           = "ami-12345678"
+  instance_type = "t2.micro"
+
+  provisioner "local-exec" {
+    command = "echo 'Hello, my name is pradip' > hello.txt"
+  }
+}
+
+ ```
+
+`local-exec` provisioner runs a command that creates a file called hello.txt with the content "Hello, my name is pradip" on the local machine.
+
+ ### 2) Remote-Exec Provisioners:
+
+ Remote-exec provisioners run scripts or commands on the remote resource. These provisioners are typically used for configuring and initializing resources after they are created. 
+
+ ```
+ resource "aws_instance" "example" {
+  ami           = "ami-12345678"
+  instance_type = "t2.micro"
+
+  connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = file("~/.ssh/id_rsa")
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo apt-get update",
+      "sudo apt-get install -y nginx",
+    ]
+  }
+}
+
+ ```
+`remote-exec` provisioner uses an SSH connection to run commands on the newly created AWS EC2 instance. It updates the package cache and installs the `Nginx` web server.
