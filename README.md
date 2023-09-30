@@ -520,3 +520,50 @@ Provisioners should be used with caution because they introduce a level of imper
 
  ```
 `remote-exec` provisioner uses an SSH connection to run commands on the newly created AWS EC2 instance. It updates the package cache and installs the `Nginx` web server.
+
+# Workspace
+
+Workspaces allow you to create isolated environments within a single Terraform configuration to manage different sets of infrastructure resources. This can be useful for various purposes, such as managing multiple environments (e.g., development, staging, production) or isolating different projects within the same configuration.
+
+1) Create a New Workspace:
+
+```
+terraform workspace new dev
+terraform workspace new stage
+terraform workspace new prod
+```
+
+2) List Workspaces:
+
+```
+terraform workspace list
+```
+
+3) Switch Between Workspaces:
+
+```
+terraform workspace select dev
+```
+
+4) Delete a Workspace:
+
+```
+terraform workspace delete dev
+```
+5) workspace usage
+
+```
+terraform workspace -h
+Usage: terraform [global options] workspace
+
+  new, list, show, select and delete Terraform workspaces.
+
+Subcommands:
+    delete    Delete a workspace
+    list      List Workspaces
+    new       Create a new workspace
+    select    Select a workspace
+    show      Show the name of the current workspace
+```
+
+
