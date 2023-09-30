@@ -56,11 +56,11 @@ terraform plan
 ```
 tree
 ```
-### now ypu can see that terraform state file is created in dev 
+### now you can see that terraform state file is created in dev 
 
 ![Screenshot 2023-09-30 215539](https://github.com/pradip2994/Terraform_Project/assets/124191442/a2eebc4e-6af4-4c98-ac89-03e17f7b2676)
 
-### now ypu can see that terraform state file is created in prod
+### Similarly terraform state file is created in prod
 
 ![Screenshot 2023-09-30 215728](https://github.com/pradip2994/Terraform_Project/assets/124191442/35093469-1a42-40d6-94ba-2ab46720b3ce)
 
