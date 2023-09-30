@@ -8,12 +8,12 @@ variable "instance_type" {
 
   default = {
     "dev" = "t2.micro"
-    "prod" = "t2.medium"
+    "prod" = "t2.xlarge"
   }
 }
 
 module "ec2_instance" {
   source = "./modules/ec2_instance"
   ami = var.ami
-  instance_type = lookup(var.instance_type, terraform.workspace, "t2.xlarge")
+  instance_type = lookup(var.instance_type, terraform.workspace, "t2.medium")
 }
